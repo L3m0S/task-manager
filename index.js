@@ -1,9 +1,11 @@
 "use strict";
 
 const Hapi = require("@hapi/hapi");
-const setUpTaskRoutes = require("./src/api/tasks/taskRoutes");
+const setUpTaskRoutes = require("./src/api/tasks/task.routes");
+const setUpUserRoutes = require("./src/api/users/user.routes");
 const mongoose = require("mongoose");
 const redisService = require("./src/service/redisService");
+const Jwt = require("@hapi/jwt");
 
 const init = async () => {
   try {
@@ -14,6 +16,7 @@ const init = async () => {
     });
 
     setUpTaskRoutes(server);
+    setUpUserRoutes(server);
 
     mongoose
       .connect(
